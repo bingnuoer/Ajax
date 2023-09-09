@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <input type="file" id="file1">
+    <button id="btnUplode">上传文件</button>
+
+    <br>
+
+    <img src="./img/loading.gif" alt="" style="display: none;" id="loading">
+
+    <script>
+        $(function () {
+            // 4.监听ajax发起请求了 展示图片
+            $(document).ajaxStart(function(){
+                // 执行事件 展示图片
+                $('#loading').show()
+            })
+
+            // 5.监听ajax结束请求了 隐藏图片
+            $(document).ajaxStop(function(){
+                $('#loading').hide()
+            })
+
+
+            // 1.绑定点击事件
+            $('#btnUplode').on('click', function () {
+                // js对象转换成DOM对象 获取file
+                var files = $('#file1')[0].files
+                if (files.length <= 0) {
+                    return alert('请上传文件！')
+                }
+                // console.log('ok')
+
+                // 2.存储数据
+                var fd = new FormData()
+                fd.append('avatar', files[0])
+
+                // 3.js只能 发起ajax请求 上传文件
+                $.ajax({
+                    method: 'POST',
+                    url: 'https://ajax-base-api-t.itheima.net/api/upload/avatar',
+                    data: fd,
+                    // js只能 发起ajax请求 上传文件 的两个固定属性
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+
+            })
+        })
+    </script>
+</body>
+
+</html>

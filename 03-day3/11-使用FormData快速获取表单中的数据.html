@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form1">
+        <!-- "/"：绝对闭合 -->
+        <!-- autocomplete="off":防止自动填充 -->
+        <input type="text" name="uname" autocomplete="off" />
+        <input type="password" name="upwd" />
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        // 1.使用DOM获取表单
+        var form = document.querySelector('#form1')
+        // 绑定提交事件
+        form.addEventListener('submit', function (e) {
+            // 阻止默认提交行为
+            e.preventDefault()
+
+            // 2.创建一个formdata对象 获取表单数据
+            var fd = new FormData(form)
+
+            // 3.创建xhr对象
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', 'https://ajax-base-api-t.itheima.net/api/formdata')
+            xhr.send(fd)
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(JSON.parse(xhr.responseText))
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

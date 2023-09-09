@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/news.css" />
+  <script src="./lib/jquery.js"></script>
+  <script src="./lib/template-web.js"></script>
+  <script src="./js/news.js"></script>
+</head>
+
+<body>
+
+  <div id="news-list">
+
+  </div>
+
+  <script type="text/html" id="tpl-news">
+      <!-- 把body里面的新闻项剪切过来 -->
+  <!-- template标准语法循环渲染新闻数据 -->
+  <!-- 数组是res里面的data -->
+  {{each data}}
+  <div class="news-item">
+    <!-- 图片地址拼接字符串 -->
+    <img class="thumb" src="{{'https://ajax-base-api-t.itheima.net'+$value.img}}" alt="" />
+    <div class="right-box">
+      <h1 class="title">{{$value.title}}</h1>
+      <div class="tags">
+        {{each $value.tags}}
+        <span>{{$value}}</span>
+        {{/each}}
+      </div>
+      <div class="footer">
+        <div>
+          <span>{{$value.source}}</span>&nbsp;&nbsp;
+          <!-- 时间使用过滤器 -->
+          <span>{{$value.time | dataFormat}}</span>
+        </div>
+        <span>评论数：{{$value.cmtcount}}</span>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+  </script>
+</body>
+
+</html>

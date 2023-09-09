@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = '<div>{{name}}今年{{age}}岁了</div>'
+        // \s:空格
+        // \s*：多个空格
+        var pattern = /{{\s*([a-zA-Z]+)\s*}}/
+
+        // 第一次匹配
+        var ret1 = pattern.exec(str)
+        // console.log(ret1)
+        str = str.replace(ret1[0], ret1[1])
+        console.log(str) // <div>name今年{{age}}岁了</div>
+
+        // 第二次匹配
+        var ret2 = pattern.exec(str)
+        // console.log(ret2)
+        str = str.replace(ret2[0], ret2[1])
+        console.log(str) // <div>name今年age岁了</div>
+
+        // 第三次匹配
+        var ret3 = pattern.exec(str)
+        console.log(ret3) //null 表示没有对应项匹配
+    </script>
+</body>
+
+</html>

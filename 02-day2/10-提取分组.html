@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 要匹配{{name}}
+        var str = '<div>我是{{name}}</div>'
+        // 带+是重复多次 匹配{{}}里面的内容要带()：表示分组
+        var pattern = /{{([a-zA-Z]+)}}/
+
+        var result = pattern.exec(str)
+        console.log(result) 
+        //['{{name}}', 'name', index: 7, input: '<div>我是{{name}}</div>', groups: undefined]
+    </script>
+</body>
+</html>

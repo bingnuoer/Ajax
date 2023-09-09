@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.创建xhr
+        var xhr = new XMLHttpRequest()
+        // 2.准备url 调用open()
+        xhr.open('POST', url = 'https://ajax-base-api-t.itheima.net/api/addbook')
+        // 3.准备固有属性 Content-Type属性
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        // 3.发送请求 调用send()
+        xhr.send('bookname=水浒传&author=施耐庵&publisher=上海图书出版社')
+        // 4.监听 服务器响应
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText) // {"status":201,"msg":"添加图书成功"}
+            }
+        }
+    </script>
+</body>
+
+</html>

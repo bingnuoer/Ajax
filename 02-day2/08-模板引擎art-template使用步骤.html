@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.导入art-template -->
+    <script src="./lib/template-web.js"></script>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <!-- 3.定义模板
+    模板必须定义到script中，用html解析 -->
+    <!-- <script type="text/javascript">  //type="text/javascript"解析的是js，如果不写这个属性，script默认解析js -->
+    <script type="text/html" id="tpl-user">
+        <!-- "{{}} 是占位符，“art-template”函数渲染的数据自动解析到{{}}里面 
+         template把  数据data里面的name渲染到{{}}里面  -->
+
+    <h1>{{name}}---------{{age}}</h1>
+
+    <!-- art-template 标准语法：原文输出 -->
+    {{@ text}}
+
+    <!-- art-template 标准语法：判断输出 -->
+    <div>
+        {{if flag === 0}}
+        flag的值是0
+        {{else if flag === 1}}
+        flag的值是1
+        {{/if}}
+    </div>
+
+    <!-- art-template 标准语法：循环输出 -->
+    <ul>
+        {{each hobby}}
+        <li>循环索引是：{{$index}}，循环项是：{{$value}}</li>
+        {{/each}}
+    </ul>
+
+    <!-- art-template 标准语法：过滤器 -->
+    <!-- <h3>{{regTime}}</h3> //"2023-06-07T04:17:56.693Z" -->
+    <h3>{{regTime | dateFormat}}</h3>
+    <!-- 过滤输出结果： 2023-6-7 -->
+    </script>
+
+    <script>
+        // 定义需要过滤时间数据的过滤器
+        // date是形参，接收regTime
+        template.defaults.imports.dateFormat = function (date) {
+            var y = date.getFullYear()
+            // 月份需要+1，因为从0开始
+            var m = date.getMonth() + 1
+            var d = date.getDate()
+            return y + '-' + m + '-' + d
+        }
+
+        // 2.定义需要渲染的数据
+        var data = {
+            name: 'zs',
+            age: 18,
+            text: '<h3>测试原文输出</h3>',
+            flag: 1,
+            hobby: ['吃饭', '睡觉', '打代码'],
+            regTime: new Date()
+        }
+
+        // 4.调用template函数 template('模板id(不加#)',数据)
+        var htmlStr = template('tpl-user', data)
+        console.log(htmlStr)  // 结果：<h1>zs</h1>
+
+        // 5.渲染HTML结构
+        $("#container").html(htmlStr)
+    </script>
+</body>
+
+</html>

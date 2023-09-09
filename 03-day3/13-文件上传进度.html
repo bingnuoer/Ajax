@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入bootstrap -->
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <!-- 导入jQuery -->
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <!-- 一、定义UI结构 -->
+    <!-- 1.文件选择框 -->
+    <input type="file" id="file1">
+    <!-- 2.按钮 -->
+    <button id="btnUplode">上传文件</button>
+
+    <!-- bootstrap的进度条样式 -->
+    <div class="progress" style="margin: 10px; width: 500px;">
+        <div class="progress-bar progress-bar-striped active" style="width: 0%" id="prevent">
+            0%
+        </div>
+    </div>
+    <br>
+    <!-- 3.上传到服务器的图片 -->
+    <img src="" alt="" id="img" width="800">
+
+    <script>
+        // 二、验证是否选择了文件
+        // 1.获取文件上传按钮
+        var btn = document.querySelector('#btnUplode')
+        // 2.给按钮绑定点击事件处理函数
+        btn.addEventListener('click', function () {
+            // 3.获取用户上传的文件列表
+            var files = document.querySelector('#file1').files //file的属性files 返回个文件数组
+            // 判断用户是否上传了文件
+            if (files.length <= 0) {
+                return alert('请上传文件')
+            }
+            // console.log('用户上传了文件')
+
+            // 三、向FormData中追加文件
+            // 4.将用户选择的文件 追加到FormData中 重点是fd数据
+            var fd = new FormData()
+            fd.append('adatar', files[0])
+
+            // 5.创建xhr对象，上传文件请求 把用户上传的文件上传到服务器
+            var xhr = new XMLHttpRequest()
+            // 6.查看文件上传进度
+            xhr.upload.onprogress = function (e) {
+                // 判断上传成功，再输出进度
+                if (e.lengthComputable) {
+                    var result = Math.ceil((e.loaded / e.total) * 100)
+                    // console.log(result)
+                    // 动态上传进度
+                    $('#prevent').attr('style','width:'+result+'%').html(result+'%')
+                }
+            }
+            // 7.监听文件上传完毕 修改进度条样式
+            $('#prevent').removeClass().addClass('progress-bar progress-bar-success')
+
+            // 四、使用xhr发起上传文件请求
+            xhr.open('POST', 'https://ajax-base-api-t.itheima.net/api/upload/avatar')
+            xhr.send(fd)
+
+            // 五、监听onreadystatechange事件
+            // 6.服务器监听事件
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 服务器响应成功 
+                    // 把服务器响应的数据转换成对象
+                    var data = JSON.parse(xhr.responseText)
+                    // {message: '上传文件成功！', status: 200, url: '/uploads/1686797022566_71f70e0e575740d7a201cc9d60f71452.png'}
+                    // console.log(data)
+                    if (data.status === 200) {
+                        // 服务器返回数据成功
+                        // 填充img的src属性
+                        document.querySelector('#img').src = 'https://ajax-base-api-t.itheima.net' + data.url
+
+                    } else {
+                        // 服务器返回数据失败 
+                        console.log(data.message)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+</head>
+<body>
+   
+    
+    <script>
+        $.ajax({
+            url:'https://ajax-base-api-t.itheima.net/api/jsonp?&name=zs&age=16',
+            dataType:'jsonp',
+            // 不用
+            jsonp:'cd',
+            // 常用，修改回调函数名
+            jsonpCallback:'abc',
+            success:function(res){
+                console.log(res)
+            }
+        })
+    </script>
+</body>
+</html>

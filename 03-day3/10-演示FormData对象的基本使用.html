@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建一个formdata对象
+        var fd = new FormData()
+        // 向formdata里面填充数据（用户提交的数据）
+        fd.append('uname', 'zs')
+        fd.append('upwd', 123456)
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST', 'https://ajax-base-api-t.itheima.net/api/formdata')
+        // 把fd数据发送到服务器
+        xhr.send(fd)
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // 把服务器响应回来的数据转换成对象再输出
+                console.log(JSON.parse(xhr.responseText))
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/axios.js"></script>
+</head>
+
+<body>
+    <button id="btn1">axios发起get请求</button>
+    <button id="btn2">axios发起post请求</button>
+
+    <!-- 直接使用axios发起请求 -->
+    <button id="btn3">直接使用axios发起get请求</button>
+    <button id="btn4">直接使用axios发起post请求</button>
+
+    <script>
+        // 一、axios发起get请求
+        document.querySelector('#btn1').addEventListener('click', function () {
+            // 1.url地址
+            var url = 'https://ajax-base-api-t.itheima.net/api/get'
+            // 2.数据参数 对象
+            var paramsObj = { uname: 'zs', age: 20 }
+
+            // 3.axios发起get请求
+            // (url,数据对象——键值对形式).返回数据
+            axios.get(url, { params: paramsObj }).then(function (res) {
+                // console.log(res) // 6个属性 
+                console.log(res.data) // res.data才是服务器返回真实数据
+            })
+        })
+
+        // 二、axios发起post请求
+        document.querySelector('#btn2').addEventListener('click', function () {
+            var url = 'https://ajax-base-api-t.itheima.net/api/post'
+            var dataObj = { address: '北京市', location: '密云区' }
+
+            // axios发起post请求
+            axios.post(url, dataObj).then(function (res) {
+                console.log(res.data)
+            })
+        })
+
+        // 三、直接使用axios发起get请求
+        document.querySelector('#btn3').addEventListener('click', function () {
+            var url = 'https://ajax-base-api-t.itheima.net/api/get'
+            var paramsData = { name: '蜘蛛侠', age: 18 }
+            axios({
+                method: 'GET',
+                url: url,
+                // 直接使用axios发起get请求 的数据对象 用“params”参数指定
+                params: paramsData
+            }).then(function (res) {
+                console.log(res.data)
+            })
+        })
+
+        // 四、直接使用axios发起post请求
+        document.querySelector('#btn4').addEventListener('click', function () {
+            axios({
+                method: 'POST',
+                url: 'https://ajax-base-api-t.itheima.net/api/post',
+                // 直接使用axios发起post请求 的数据对象 用“data”参数指定
+                data: {
+                    name: '娃哈哈',
+                    age: 20,
+                    gender: 'nv'
+                }
+            }).then(function (res) {
+                console.log(res.data)
+            })
+        })
+    </script>
+</body>
+
+</html>

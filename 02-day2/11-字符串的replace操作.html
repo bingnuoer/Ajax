@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 字符串
+        var str = '<div>我是{{name}}</div>'
+        // 正则
+        var pattern = /{{([a-zA-Z]+)}}/
+
+        // 字符串匹配
+        var patternResult = pattern.exec(str)
+        console.log(patternResult) // ['{{name}}', 'name', index: 7, input: '<div>我是{{name}}</div>', groups: undefined]
+
+        // 字符串替换
+        str = str.replace(patternResult[0], patternResult[1])
+        console.log(str) // <div>我是name</div>
+    </script>
+</body>
+
+</html>

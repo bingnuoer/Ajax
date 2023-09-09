@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./lib/template-web.js"></script> -->
+    <!-- 调用自己封装的模板引擎template -->
+    <script src="./js/template.js"></script>
+</head>
+
+<body>
+    <div id="user"></div>
+    <!-- 1.创建模板 -->
+    <script type="text/html" id="tpl-user">
+        <div>姓名：{{name}}</div>
+        <div>年龄：{{ age}}</div>
+        <div>性别：{{gender }}</div>
+        <div>住址：{{ address }}</div>
+     </script>
+
+    <!-- 预调用模板引擎 -->
+    <script>
+        // 2.创建数据
+        var data = {
+            name: '张三',
+            age: 20,
+            gender: '男',
+            address: '北京市密云区'
+        }
+
+        // 3.封装自己的模板引擎template 在js文件中 
+
+        // 4.调用模板引擎：template
+        var htmlStr = template('tpl-user', data)
+
+        // 5.渲染到html中
+        document.getElementById("user").innerHTML = htmlStr
+    </script>
+</body>
+
+</html>

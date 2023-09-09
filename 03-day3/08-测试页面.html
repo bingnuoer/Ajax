@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/itemheima.js"></script>
+</head>
+
+<body>
+    <script>
+        // 测试get请求
+        // itheima({
+        //     method:'GET',
+        //     url:'https://ajax-base-api-t.itheima.net/api/getbooks',
+        //     data:{
+        //         id:1
+        //     },
+        //     success:function(res){
+        //         console.log(res)
+        //     }
+        // })
+
+        // 测试post请求
+        itheima({
+            method: 'POST',
+            url: 'https://ajax-base-api-t.itheima.net/api/addbook',
+            data: {
+                bookname: '六级真题',
+                author: '黄皮书',
+                publisher: '上海图书出版社'
+            },
+            success: function (res) {
+                console.log(res)
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 最后加“/”为了更完整 -->
+    <link rel="stylesheet" href="./lib/bootstrap.css"/>
+    <script src="./lib/jquery.js"></script>
+    <script src="./js/cmt.js"></script>
+
+</head>
+<body>
+    <!-- 评论面板 -->
+    
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+                <h3 class="panel-title">发表评论</h3>
+          </div>
+          
+          <!-- 表单改造：给服务器提交数据 -->
+          <!-- <div class="panel-body"> -->
+          <form class="panel-body" id="formAddCmt">
+                <div style="padding: 10px;">评论人：</div>
+                <!-- 给表单添加类名bs样式：class="form-control" -->
+                <input type="text" placeholder="请输入评论人" class="form-control" name="username" autocomplete="off">
+                <div style="padding: 10px;">评论内容：</div>         
+                <textarea placeholder="请输入评论内容(最多120字)" class="form-control" name="content"></textarea>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">发表评论</button> 
+          </form>               
+          <!-- </div> -->
+          
+    </div>
+ 
+    <!-- 评论列表 -->
+    <!-- 列表组：bs3-list-group:badges -->
+    
+    <ul class="list-group" id="cmt-list">
+        <li class="list-group-item">
+            <!-- class="badge" 类名自带浮动效果 -->
+            <span class="badge" style="background-color: orange;">评论时间：</span>
+            <span class="badge" style="background-color: skyblue;">评论人：</span>
+            Item 1
+        </li>        
+    </ul>
+
+    <!-- <script>
+        // ajax请求数据 
+        // 需要接口文档
+        // 这些js部分 单独写个js文件 并引入
+    </script> -->
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            /* 超出部分隐藏 */
+            overflow: hidden;
+        }
+
+        #angle {
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./angel.gif" alt="" id="angle">
+
+    <script>
+        // 1.获取图片
+        var angle = $('#angle')
+        // 二、使用节流阀优化效果 节省资源
+        // 2.1 定义节流阀
+        var timer = null
+        // 2.给页面绑定鼠标移动事件
+        $(document).on('mousemove', function (e) {
+            // 2.4 判断节流阀是否为空
+            if (timer) {
+                return
+            }
+            // 2.2 开启节流阀
+            timer = setTimeout(function () {
+                // 3.获取鼠标横纵坐标,设置给图片样式
+                // console.log(e.pageX)
+                // console.log(e.pageY)
+                $(angle).css('top', e.pageY + 'px').css('left', e.pageX + 'px')
+                console.log(123);
+            }, 16)
+            // 2.3 重置节流阀
+            timer = null
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+</head>
+<body>
+    <!-- 多个script标签中的数据共享 -->
+    <script>
+        // 定义函数
+        function success(data){
+            console.log('拿到的数据：')
+            console.log(data)
+        }
+    </script>
+
+    <!-- 通过查询字符串'?callback=success'的形式使服务器调用相应的函数 -->
+    <script src="./js/getdata.js?callback=success" ></script>
+</body>
+</html>
